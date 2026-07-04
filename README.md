@@ -9,7 +9,7 @@ A weekly Instagram workflow in three connected moves. First it scouts what's tre
 ## Install
 
 - **From the catalog:** [skillme.dev/pack/instagram-trend-post-builder](https://skillme.dev/pack/instagram-trend-post-builder) — install the whole pack into Claude in one step.
-- **With the skills CLI:** `npx skills add aouellets/instagram-trend-post-builder`
+- **With the skills CLI:** `npx skills add SkillMedev/instagram-trend-post-builder`
 - **Manually:** copy any `skills/<slug>/SKILL.md` into your Claude skills directory.
 
 ## Skills in this pack
