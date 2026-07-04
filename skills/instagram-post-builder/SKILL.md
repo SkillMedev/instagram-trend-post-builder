@@ -1,7 +1,7 @@
 ---
 name: Instagram Post Builder
 slug: instagram-post-builder
-description: Interactively builds a complete, copy-paste-ready Instagram post package — three hook variants using distinct patterns, a caption body, one clear CTA, a 15-20 hashtag set across reach tiers, alt text, and a visual direction with shot list or slide breakdown — through a one-question-at-a-time interview, optionally grounded in a trend-educator briefing. Use when someone says "write an Instagram post", "help me with a caption for this reel", "build a carousel about my launch", or reaches the build stage after trend-educator. Do NOT use for finding what is trending — use instagram-trend-scout instead — or for planning a month of content — use social-content-calendar instead.
+description: Interactively builds a complete, copy-paste-ready Instagram post package — three hook variants using distinct patterns, a caption body, one clear CTA, a 15-20 hashtag set across reach tiers, alt text, and a visual direction with shot list or slide breakdown — through a one-question-at-a-time interview, optionally grounded in a trend-educator briefing. Use when someone says "write an Instagram post for my launch", "build the full post package for this reel", "put together a carousel with hooks and hashtags", or reaches the build stage after trend-educator. Do NOT use for finding what is trending — use instagram-trend-scout instead; for a single caption without the full package — use social-caption-writer; for planning a month of content — use social-content-calendar.
 version: 1.0.0
 stage: S3
 tags: [instagram, social-media, copywriting, captions, hashtags, content-creation]
@@ -37,12 +37,12 @@ The skill runs as a short guided interview, then generates. **Ask exactly one qu
 5. **Q4 — The goal.** Ask what one action a viewer should take after seeing it (maps to `cta_goal`). (Skip if supplied.)
 6. **Q5 — Format pick.** Recommend a `format` from the `opportunity_angles` (or ask, if standalone) and confirm reel vs carousel vs single image — because it changes hook and visual direction.
 7. **Confirm the brief.** Echo a one-line summary: message + audience + tone + goal + format. Ask "Build it?" Proceed on confirmation; revise if not.
-8. **Generate hooks.** Write **3 distinct hook variants**, each using a different proven pattern from the trend card's `winning_hooks` where available (e.g. one curiosity-gap, one contrarian, one direct-promise). Keep each under ~12 words and front-load the stakes.
-9. **Write the caption body.** Open by paying off the chosen hook, deliver the message with one clear idea per line/short paragraph, and write in the agreed `tone` for the stated `audience`. Match caption length to the chosen format.
+8. **Generate hooks.** Write **3 distinct hook variants**, each using a different proven pattern from the trend card's `winning_hooks` where available (e.g. one curiosity-gap, one contrarian, one direct-promise). Keep each under ~12 words and front-load the stakes — on a reel, the first 3 seconds decide whether the viewer scrolls past, so the hook must land in the first frame, not after an intro.
+9. **Write the caption body.** Open by paying off the chosen hook, deliver the message with one clear idea per line/short paragraph, and write in the agreed `tone` for the stated `audience`. The feed truncates captions at roughly 125 characters before the "…more" fold — the hook payoff and the reason to keep reading must fit above it. The hard ceiling is 2,200 characters; educational carousels can run long, reel captions work best well under that since the video carries the message.
 10. **Write the CTA.** One clear ask aligned to `cta_goal`. Make it specific and low-friction ("comment 'GUIDE' and I'll send it" beats "let me know your thoughts").
-11. **Build the hashtag set.** Produce **15–20 hashtags** mixing three tiers: a few broad (high-volume), several mid-size (niche-defining), and a few specific/long-tail (low-competition). Avoid banned or spammy tags. Tie them to the niche from the brief.
+11. **Build the hashtag set.** Produce **15–20 hashtags** mixing three tiers: a few broad (high-volume), several mid-size (niche-defining), and a few specific/long-tail (low-competition). The platform allows up to 30 per post — maxing it out reads as spam to both the algorithm and humans, which is why this skill caps at 20. Avoid banned or spammy tags. Tie them to the niche from the brief.
 12. **Write the alt text.** One to two sentences describing the visual for screen-reader accessibility — literal and descriptive, not keyword-stuffed.
-13. **Suggest a visual direction.** Concrete art direction for the chosen format: shot list / slide breakdown, on-screen text placement, and a first-frame or cover idea that matches the hook.
+13. **Suggest a visual direction.** Concrete art direction for the chosen format: shot list / slide breakdown, on-screen text placement, and a first-frame or cover idea that matches the hook. For carousels, keep it to 6–10 slides — completion rate falls off past that, and the last slide should always be the CTA.
 14. **Assemble and deliver** the complete post package as copy-paste blocks (see Output Format).
 
 ## Output Schema
@@ -94,6 +94,23 @@ Deliver as labeled, copy-paste-ready blocks under the header `📦 Post Package 
 - **User abandons mid-interview:** Build the best package you can from what's been gathered so far, clearly mark the assumptions you filled in, and invite the user to refine any field. Never leave them empty-handed.
 - **User wants edits after delivery:** Treat the package as a draft. Regenerate only the requested part (e.g. just new hooks) rather than rebuilding everything.
 - **Over/under hashtag count:** Always land in the 15–20 range; if the niche is narrow, fill with adjacent and long-tail tags rather than padding with generic ones or dropping below 15.
+
+## Do NOT
+
+- **Do not ask multiple questions in one turn.** The one-question-at-a-time interview is the skill's defining behavior; a wall of form fields gets half-answered and the package inherits the gaps.
+- **Do not bury the hook after an intro.** "Hey guys, so today I want to talk about…" is the first 3 seconds a reel cannot afford. The hook is line one, frame one, always.
+- **Do not write the caption's payoff below the ~125-character fold.** If the reader has to tap "more" to find out why they should care, most never will.
+- **Do not pad the hashtag set with generic mega-tags** (#love, #instagood) to hit the count. They add spam signal, not reach — fill with adjacent long-tail niche tags instead.
+- **Do not keyword-stuff the alt text.** It exists for screen readers; describe the visual literally. Stuffing it trades accessibility for an SEO myth.
+- **Do not let the trend dictate the message.** The `educator_brief` shapes the packaging (format, hook pattern, timing); the user's own message is the content. A post that is all trend and no message performs once and builds nothing.
+
+## Quality bar
+
+- Three hooks, three genuinely different patterns — not one idea reworded.
+- The chosen hook's payoff sits above the caption fold.
+- CTA is a single, specific, low-friction action matching `cta_goal`.
+- Hashtag set lands in 15–20 with all three reach tiers represented.
+- Every block is copy-paste ready — no placeholders left unfilled, no meta-commentary inside the fenced blocks.
 
 ## Flywheel Connections
 
