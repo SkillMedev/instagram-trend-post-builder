@@ -1,7 +1,7 @@
 ---
 name: Instagram Trend Scout
 slug: instagram-trend-scout
-description: Researches what is currently trending on Instagram for a given niche — winning Reel and carousel formats, hook styles, caption length, and hashtag patterns — using web search, no API key required. Use this at the start of a weekly content cycle when you want to know what is working right now before you create anything. Trigger when the user asks to scout, research, or find Instagram trends for a topic or niche.
+description: Researches what is currently working on Instagram for a niche using web search only — no API or login — and returns a structured scouting report of top content, winning Reel and carousel formats, reusable hook patterns, content gaps, and an engagement benchmark with honest confidence labels. Use when someone asks "what's trending on Instagram for my niche", "scout Reels formats for home baristas", "what hooks are working right now", or is starting a weekly content cycle and wants signals before creating. Do NOT use for explaining why trends work in plain language — use trend-educator instead; for drafting the actual post, use instagram-post-builder.
 version: 1.0.0
 stage: S1
 tags: [instagram, social-media, trend-research, content-strategy, reels, web-search]

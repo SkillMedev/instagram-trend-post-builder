@@ -1,95 +1,91 @@
 ---
 name: Trend Educator
-slug: trend-educator
-description: Turns a raw Instagram trend-scout report into a plain-language briefing that teaches WHY each trend is working — the algorithm mechanics, audience psychology, and format dynamics behind it — and surfaces opportunity angles. Use this right after instagram-trend-scout, when the user has trend data but needs to understand it before creating. Trigger when the user wants trends explained, a trend briefing, or to learn why content is performing.
-version: 1.0.0
-stage: S2
-tags: [instagram, social-media, education, content-strategy, briefing, creator-coaching]
-license: MIT
+description: Turns a raw Instagram trend-scout report into a plain-language briefing that teaches WHY each trend is working — the algorithm mechanics, audience psychology, and format dynamics behind it — and surfaces specific opportunity angles as a screenshot-ready trend card. Use when someone asks "explain these trends to me", "why is this format blowing up", "turn this trend report into a briefing", or has instagram-trend-scout output and needs to understand it before creating. Do NOT use to gather the trend data itself — use instagram-trend-scout instead; do NOT use to draft the actual post — use instagram-post-builder instead; do NOT use for statistical trend detection in business or product data — use trend-analysis instead.
 ---
 
 # Trend Educator
 
-**Stage: S2 — Teach** (second skill in the Instagram Trend Post Builder flywheel)
+Data alone does not change what a creator makes — understanding does. This skill converts a structured instagram-trend-scout report into a short, jargon-free briefing the user can internalize: after reading the trend card, they could explain why a format works to a friend and reuse the underlying principle after the specific trend fades. The costly mistake it prevents is blind imitation — copying a trending format without its mechanism, which produces content that mimics the surface and misses the engine.
 
-Data alone does not change what a creator makes — understanding does. This skill takes the structured report from `instagram-trend-scout` and converts it into a short, jargon-free briefing the user can actually internalize. The goal is that after reading the trend card, the user could explain *why* a format is working to a friend, and reuse the underlying principle even after the specific trend fades.
+The rule throughout: teach, do not dump. Every claim ties back to a mechanism — how the ranking system rewards it, what it does to the viewer's attention, or how the format itself carries the message. No buzzword ships without a plain-English unpacking.
 
-Teach, do not dump. Every claim ties back to a mechanism: how the Instagram ranking system rewards it, what it does to the viewer's brain, or how the format itself carries attention. No buzzwords without a plain-English unpacking.
+## Operating procedure
 
-## Input Schema
+### Step 1: Gather and validate inputs
 
-| Field | Type | Required | Default | Description |
-|-------|------|----------|---------|-------------|
-| `scout_report` | object | yes | — | The full output object from `instagram-trend-scout` (`top_content`, `winning_formats`, `winning_hooks`, `content_gaps`, `engagement_benchmark`, plus `keyword`/`time_range`). |
-| `depth` | string | no | `"standard"` | Briefing length. One of `"quick"` (summary + top 2 explanations), `"standard"` (full card), `"deep"` (adds extra mechanism detail per trend). |
-| `audience_literacy` | string | no | `"beginner"` | How much the user already knows. One of `"beginner"` (define everything), `"intermediate"` (skip basics). Controls how much jargon gets unpacked. |
+- scout_report (required): the full output object from instagram-trend-scout — top_content, winning_formats, winning_hooks, content_gaps, engagement_benchmark, plus the keyword and time range. If it is missing, empty, or malformed, stop and say: "There is no trend report to explain yet — run instagram-trend-scout first, or paste its output here." Never invent trends.
+- depth (default "standard"): "quick" = summary plus top 2 explanations; "standard" = full card; "deep" = extra mechanism detail per trend.
+- audience_literacy (default "beginner"): "beginner" = define everything; "intermediate" = skip basics. Controls how much jargon gets unpacked.
 
-## Workflow
+If engagement_benchmark confidence is low, lead the briefing with that caveat and frame explanations as hypotheses ("this is likely working because…"), not certainties.
 
-1. **Validate input.** Confirm `scout_report` is present and contains at least `winning_formats` or `winning_hooks`. If it is empty or malformed, fall back to the error path (see Error Handling) — do not invent trends.
-2. **Pick the teachable trends.** Select the 3–5 strongest signals across `winning_formats` and `winning_hooks`, prioritizing items that recurred (`frequency` = common/dominant) and have corroborating `top_content`. If `depth` = `"quick"`, take the top 2.
-3. **Write the trend_summary.** Produce 3–5 bullets that state, in plain language, what is working in this niche right now. Each bullet is one sentence a busy creator could read in five seconds. No metrics dumps — translate bands into meaning ("saves are the signal that matters here, not likes").
-4. **Explain WHY for each trend.** For every selected trend, write a `why_it_works` entry that names three forces in plain English:
-   - **`algorithm_factor`** — what the ranking system rewards about it (e.g. "rewatches and saves push it to non-followers"), stated mechanically, not mystically.
-   - **`psychology_factor`** — what it does to the viewer (e.g. "an open loop makes the brain need the resolution, so they finish the video").
-   - **`format_mechanics`** — how the format itself carries attention (e.g. "text-on-screen lets it work muted in-feed").
-   Unpack any term a `beginner` would not know inline.
-5. **Derive opportunity angles.** Combine the `content_gaps` from the scout with the explained trends to produce `opportunity_angles`: specific, do-able angles the user could own. Each angle pairs a *what to say* with the *format to say it in* and *why it should land*.
-6. **Build the trend card.** Assemble everything into one internalizable "trend card" — the summary, the why's, and the angles — sized to `depth`.
-7. **Sanity check for jargon.** Re-read the briefing. Replace or define any term that a beginner would not understand. If a sentence does not tie to a mechanism, cut it.
-8. **Return** the output object and hand `opportunity_angles` + the trend card forward to `instagram-post-builder`.
+### Step 2: Pick the teachable trends
 
-## Output Schema
+Select the 3-5 strongest signals across winning_formats and winning_hooks, prioritizing items that recurred (frequency of common or dominant) and have corroborating top_content examples. If depth is "quick", take the top 2. If the report is thin (1-2 signals), teach what is there honestly, note that the briefing is narrow, and suggest re-scouting with a broader keyword — never pad.
 
-```json
-{
-  "keyword": "string — echoed from the scout report",
-  "trend_summary": [
-    "string — 3 to 5 plain-language bullets on what is working now (5-second reads)"
-  ],
-  "why_it_works": [
-    {
-      "trend": "string — the format or hook being explained",
-      "plain_explanation": "string — one-paragraph, no-jargon summary of why it works",
-      "algorithm_factor": "string — what the ranking system rewards about it",
-      "psychology_factor": "string — the effect on the viewer's attention or emotion",
-      "format_mechanics": "string — how the format itself carries or holds attention",
-      "transferable_principle": "string — the durable lesson that outlives this specific trend"
-    }
-  ],
-  "opportunity_angles": [
-    {
-      "angle": "string — a specific thing the user could make/say",
-      "format_to_use": "string — reel | carousel | single_image | story",
-      "rationale": "string — why this angle should land for this audience now",
-      "from_gap": "boolean — true if this angle came from a content_gap the scout found"
-    }
-  ],
-  "confidence_note": "string — restates the scout's confidence so the user weighs the briefing accordingly"
-}
-```
+### Step 3: Write the trend summary
 
-## Output Format
+3-5 bullets stating, in plain language, what is working in this niche right now. Each bullet is one sentence a busy creator reads in five seconds. Translate metric bands into meaning ("saves are the signal that matters here, not likes") — no metrics dumps.
 
-Render as a single **Trend Card** the user can screenshot and keep:
+### Step 4: Explain WHY for each trend
 
-- **Title:** `🧠 Trend Card — {keyword}`
-- **What's working now** — the `trend_summary` bullets.
-- **Why it works** — one short block per trend: bold the trend name, then 3 labeled lines (Algorithm · Psychology · Format), then an italic _"Principle: …"_ line for the transferable lesson.
-- **Where your opening is** — `opportunity_angles` as a numbered list, each tagged with its `format_to_use`.
-- **Read with this in mind** — the `confidence_note` as a closing caveat.
-- Close with: `→ Ready to build a post? Tell instagram-post-builder what you actually want to say.`
+For every selected trend, name three forces in plain English:
 
-## Error Handling
+- Algorithm factor — what the ranking system mechanically rewards ("rewatches and saves push it to non-followers"), stated as a mechanism, never mystically.
+- Psychology factor — what it does to the viewer ("an open loop makes the brain need the resolution, so they finish the video").
+- Format mechanics — how the format itself carries attention ("text-on-screen lets it work muted in-feed").
 
-- **Empty or missing scout_report:** Do not fabricate trends. Tell the user: "I don't have a trend report to explain yet — run `instagram-trend-scout` first, or paste its output here." Then stop.
-- **Low-confidence scout data:** If `engagement_benchmark.confidence` is `"low"`, lead the briefing with that caveat and frame explanations as hypotheses ("this is likely working because…"), not certainties.
-- **Thin report (1–2 signals):** Teach what is there honestly rather than padding. Note that the briefing is narrow and suggest re-scouting with a broader keyword.
-- **Jargon leak:** If the draft contains an unexplained term for a `beginner` audience, rewrite that section before returning (enforced by Workflow step 7).
-- **User asks to skip the teaching:** Offer a one-line "quick" summary and pass straight through to `instagram-post-builder`, but keep the `opportunity_angles` intact so the next stage still has direction.
+Close each with a transferable principle: the durable lesson that outlives this specific trend. Unpack inline any term a beginner would not know.
 
-## Flywheel Connections
+### Step 5: Derive opportunity angles
 
-- **Fed by:** `instagram-trend-scout` — consumes its full output object as `scout_report`.
-- **Feeds into:** `instagram-post-builder` — passes `opportunity_angles` and the trend card so the build stage is grounded in what is working.
-- **Part of pack:** Instagram Trend Post Builder (S1 → S2 → S3).
+Combine the scout's content_gaps with the explained trends into specific, do-able angles the user could own. Each angle pairs what to say with the format to say it in and why it should land, and is tagged if it came from a content gap.
+
+### Step 6: Assemble the trend card
+
+One screenshot-keepable card, sized to depth: the summary, the whys, the angles, and a closing confidence note restating the scout's confidence so the user weighs the briefing accordingly.
+
+### Step 7: Jargon pass
+
+Re-read the whole card. If a sentence does not tie to a mechanism, cut it. If a term would stump a beginner, define it inline or replace it. If the user asks to skip the teaching, give the one-line quick summary and hand straight off — but keep the opportunity angles intact so the next stage still has direction.
+
+## Worked artifact: one trend-card block
+
+Bad (buzzword dump — what this skill must never output):
+
+> Carousels are crushing it right now. The algorithm loves them. Lean into value-driven storytelling and optimize for saves to boost your engagement.
+
+Good (mechanism-taught block, one per trend on the card):
+
+> **"Mistake-first" carousels** — the first slide names a common mistake ("You're warming up wrong"), slides 2-6 fix it.
+> - Algorithm: each swipe is a re-engagement signal, and unfinished carousels get re-served — Instagram gives the post a second impression on the same viewer.
+> - Psychology: naming a mistake triggers self-check ("wait, do I do that?"), which is a stronger open than a promise of tips.
+> - Format: one idea per slide means it works at skim speed, and the last slide's summary is what makes people save it.
+> - *Principle: open by threatening a habit the viewer already has, not by promising value they can't picture.*
+
+Card layout: title ("Trend Card — {keyword}"), "What's working now" (summary bullets), "Why it works" (one block per trend as above), "Where your opening is" (numbered angles, each tagged with format: reel / carousel / single image / story), "Read with this in mind" (confidence note), and a closing handoff line: "Ready to build a post? Tell instagram-post-builder what you actually want to say."
+
+## Deliverable
+
+Produce a single trend card containing: 3-5 plain-language summary bullets, a why-it-works block per trend (algorithm, psychology, format, transferable principle), numbered opportunity angles each with a format and rationale, and a confidence note — sized to the requested depth and clean of unexplained jargon.
+
+## Do NOT
+
+- Do not fabricate trends when the scout report is missing or thin — an invented briefing is worse than none, because the user will build on it.
+- Do not dump metrics; translate every number into what it means for what the creator should make.
+- Do not attribute performance to the algorithm mystically ("the algorithm likes it") — name the mechanical signal being rewarded.
+- Do not ship a claim without one of the three mechanisms attached.
+- Do not let low-confidence scout data read as certainty; carry the caveat into the framing of every explanation.
+- Do not skip the transferable principle — the specific trend fades; the principle is what the user paid for.
+
+## Quality bar
+
+- Every explained trend has all three mechanism lines plus a transferable principle.
+- A beginner could read the card without hitting one undefined term.
+- Every opportunity angle names a concrete thing to make, its format, and why it should land now.
+- The confidence note matches the scout's actual confidence level.
+- Nothing on the card fails the "could the user explain this to a friend?" test.
+
+## Neighbors
+
+This is the teach stage of the Instagram trend flywheel: it consumes instagram-trend-scout output and feeds instagram-post-builder. For statistical trend detection in business data, use trend-analysis. For hook writing beyond Instagram, social-hook-generator; for scheduling what the angles become, creator-content-calendar.

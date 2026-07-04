@@ -1,7 +1,7 @@
 ---
 name: Instagram Post Builder
 slug: instagram-post-builder
-description: Interactively builds a complete, ready-to-post Instagram package — three hook variants, caption body, CTA, a 15-20 hashtag set, alt text, and a visual direction — grounded in a trend briefing but driven by what the USER actually wants to say. Asks one question at a time. Use this as the final step after trend-educator, or whenever someone wants help writing an Instagram post. Trigger when the user wants to build, write, draft, or create an Instagram post or caption.
+description: Interactively builds a complete, copy-paste-ready Instagram post package — three hook variants using distinct patterns, a caption body, one clear CTA, a 15-20 hashtag set across reach tiers, alt text, and a visual direction with shot list or slide breakdown — through a one-question-at-a-time interview, optionally grounded in a trend-educator briefing. Use when someone says "write an Instagram post", "help me with a caption for this reel", "build a carousel about my launch", or reaches the build stage after trend-educator. Do NOT use for finding what is trending — use instagram-trend-scout instead — or for planning a month of content — use social-content-calendar instead.
 version: 1.0.0
 stage: S3
 tags: [instagram, social-media, copywriting, captions, hashtags, content-creation]

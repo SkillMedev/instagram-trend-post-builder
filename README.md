@@ -14,9 +14,9 @@ A weekly Instagram workflow in three connected moves. First it scouts what's tre
 
 ## Skills in this pack
 
-- **[Instagram Trend Scout](skills/instagram-trend-scout/SKILL.md)** — Researches what is currently trending on Instagram for a given niche — winning Reel and carousel formats, hook styles, caption length, and hashtag patterns — using web search, no API key required.
-- **[Trend Educator](skills/trend-educator/SKILL.md)** — Turns a raw Instagram trend-scout report into a plain-language briefing that teaches WHY each trend is working — the algorithm mechanics, audience psychology, and format dynamics behind it — and surfaces opportunity angles.
-- **[Instagram Post Builder](skills/instagram-post-builder/SKILL.md)** — Interactively builds a complete, ready-to-post Instagram package — three hook variants, caption body, CTA, a 15-20 hashtag set, alt text, and a visual direction — grounded in a trend briefing but driven by what the USER actually wants to say.
+- **[Instagram Trend Scout](skills/instagram-trend-scout/SKILL.md)** — Researches what is currently working on Instagram for a niche using web search only — no API or login — and returns a structured scouting report of top content, winning Reel and carousel formats, reusable hook patterns, content gaps, and an engagement benchmark with honest confidence labels.
+- **[Trend Educator](skills/trend-educator/SKILL.md)** — Turns a raw Instagram trend-scout report into a plain-language briefing that teaches WHY each trend is working — the algorithm mechanics, audience psychology, and format dynamics behind it — and surfaces specific opportunity angles as a screenshot-ready trend card.
+- **[Instagram Post Builder](skills/instagram-post-builder/SKILL.md)** — Interactively builds a complete, copy-paste-ready Instagram post package — three hook variants using distinct patterns, a caption body, one clear CTA, a 15-20 hashtag set across reach tiers, alt text, and a visual direction with shot list or slide breakdown — through a one-question-at-a-time interview, optionally grounded in a trend-educator briefing.
 
 ## License
 
