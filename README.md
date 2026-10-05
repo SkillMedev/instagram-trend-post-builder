@@ -1,16 +1,17 @@
 # Instagram Trend Post Builder
 
-**Scout what's trending on Instagram, learn why it works, then build a post you actually want to make.** — built in-house by [Skill&nbsp;Me](https://skillme.dev).
+**Scout what's trending on Instagram, learn why it works, then build a post you actually want to make.** — built in-house by [Skill&nbsp;Me](https://skillme.dev/?utm_source=github&utm_medium=readme&utm_campaign=pack-instagram-trend-post-builder).
 
 A weekly Instagram workflow in three connected moves. First it scouts what's trending in your niche - winning Reel and carousel formats, hook styles, caption lengths, and hashtag patterns - using web search, no API key required. Then it teaches you why those trends are working, in plain language: the algorithm mechanics, the audience psychology, and the format dynamics behind each one, so you build judgment instead of chasing fads. Finally it builds an original post around what you actually want to say - interviewing you one question at a time, then handing back a copy-paste package: three hook variants, caption, CTA, a 15-20 hashtag set, alt text, and a visual direction. Use it at the start of each content cycle to go from "what's working?" to a finished post grounded in real signal.
 
-⭐ **If this is useful, star the repo** — it's how we gauge what to build next.
-
 ## Install
 
-- **From the catalog:** [skillme.dev/pack/instagram-trend-post-builder](https://skillme.dev/pack/instagram-trend-post-builder) — install the whole pack into Claude in one step.
+- **Claude, ChatGPT, Codex, Cursor (connector):** [install the whole pack from skillme.dev](https://skillme.dev/pack/instagram-trend-post-builder?utm_source=github&utm_medium=readme&utm_campaign=pack-instagram-trend-post-builder) — one connection, then ask for any skill by name.
+- **As files for Codex, Cursor, or Claude Code:** `npx @skillme/cli add instagram-trend-scout trend-educator instagram-post-builder --target all`
 - **With the skills CLI:** `npx skills add SkillMedev/instagram-trend-post-builder`
-- **Manually:** copy any `skills/<slug>/SKILL.md` into your Claude skills directory.
+- **Manually:** copy any `skills/<slug>/SKILL.md` into `.agents/skills/`, `.cursor/skills/`, or `.claude/skills/`.
+
+⭐ **If this is useful, star the repo** — it's how we gauge what to build next.
 
 ## Skills in this pack
 
@@ -21,4 +22,4 @@ A weekly Instagram workflow in three connected moves. First it scouts what's tre
 ## License
 
 MIT — see [LICENSE](LICENSE). Skills are portable `SKILL.md` files; the canonical
-copies live in the [Skill&nbsp;Me catalog](https://skillme.dev).
+copies live in the [Skill&nbsp;Me catalog](https://skillme.dev/browse?utm_source=github&utm_medium=readme&utm_campaign=pack-instagram-trend-post-builder).
